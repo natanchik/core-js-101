@@ -25,7 +25,7 @@ function findElement(arr, value) {
 }
 
 /**
- * TODO this task
+ *
  * Generates an array of odd numbers of the specified length
  *
  * @param {number} len
@@ -36,10 +36,9 @@ function findElement(arr, value) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
-  /* const arr = Array(len).map(() => 2 * (len - 1) + 1);
-  return arr; */
+function generateOdds(len) {
+  const arr = Array(len).fill(0).map((x, ind) => x + 2 * (ind) + 1);
+  return arr;
 }
 
 
@@ -148,9 +147,8 @@ function getStringsLength(arr) {
  *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 'x', 0  => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
-  /* return arr.slice(0, index).concat(item, ...arr.slice(index)); */
+function insertItem(arr, item, index) {
+  return arr.splice(index, 0, item);
 }
 
 /**
@@ -511,7 +509,6 @@ function distinct(arr) {
 }
 
 /**
- * TODO this task
  * Groups elements of the specified array by key.
  * Returns multimap of keys extracted from array elements via keySelector callback
  * and values extracted via valueSelector callback.
@@ -541,16 +538,16 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
-  /* const ans = new Map();
-  array.map((x) => ans.set(keySelector, valueSelector));
-  return ans; */
+function group(array, keySelector, valueSelector) {
+  const result = new Map();
+  const keys = Array.from(new Set(array.map(keySelector)));
+  keys.map((key) => result.set(key, array.filter((x) => Object.values(x).includes(key))
+    .map(valueSelector)));
+  return result;
 }
 
 
 /**
- * TODO this task
  * Projects each element of the specified array to a sequence
  * and flattens the resulting sequences into one array.
  *
@@ -563,13 +560,12 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map(childrenSelector).flat();
 }
 
 
 /**
- * TODO this task
  * Returns an element from the multidimensional array by the specified indexes.
  *
  * @param {array} arr
@@ -581,8 +577,8 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce((acc, x) => acc[x], arr);
 }
 
 
