@@ -27,8 +27,16 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 === 0) {
+    if (num % 5 === 0) {
+      return 'FizzBuzz';
+    }
+    return 'Fizz';
+  } if (num % 5 === 0) {
+    return 'Buzz';
+  }
+  return num;
 }
 
 
@@ -43,8 +51,11 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  if (n === 1) {
+    return 1;
+  }
+  return n * getFactorial(n - 1);
 }
 
 
@@ -60,8 +71,12 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let sum = 0;
+  for (let i = n1; i <= n2; i += 1) {
+    sum += i;
+  }
+  return sum;
 }
 
 
@@ -80,8 +95,11 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if (a >= b + c || b >= a + c || c >= a + b) {
+    return false;
+  }
+  return true;
 }
 
 
@@ -117,8 +135,12 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  if (rect1.top < rect2.top + rect2.height && rect1.left < rect2.left + rect2.width
+    && rect2.top < rect1.top + rect1.height && rect2.left < rect1.left + rect1.width) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -148,12 +170,14 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const len = ((point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2) ** 0.5;
+  return !(len >= circle.radius);
 }
 
 
 /**
+ * TODO this task
  * Returns the first non repeated char in the specified strings otherwise returns null.
  *
  * @param {string} str
@@ -166,10 +190,18 @@ function isInsideCircle(/* circle, point */) {
  */
 function findFirstSingleChar(/* str */) {
   throw new Error('Not implemented');
+  // const set = new Set(str.split());
+  // for (const char of set) {
+  //   if ((str.split(`${char}`).length - 1) === 1) {
+  //     return char;
+  //   }
+  // }
+  // return null;
 }
 
 
 /**
+ * TODO this task
  * Returns the string representation of math interval,
  * specified by two points and include / exclude flags.
  * See the details: https://en.wikipedia.org/wiki/Interval_(mathematics)
@@ -208,8 +240,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -225,8 +257,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return +(String(num).split('').reverse().join(''));
 }
 
 
@@ -252,12 +284,28 @@ function reverseInteger(/* num */) {
  */
 function isCreditCardNumber(/* ccn */) {
   throw new Error('Not implemented');
+  /* const checkDigit = ccn % 10;
+  const number = String(ccn).slice(0, -1).split('').reverse();
+  const listNumbers = [];
+  for (let i = 0; i < number.length; i += 1) {
+    let num;
+    if (i % 2 === 0) {
+      num = +number[i] * 2;
+      while (num > 9) {
+        num = (String(num).split('').reduce((acc, x) => acc + +x, 0));
+      }
+    } else {
+      num = +number[i];
+    }
+    listNumbers.push(num);
+  }
+  return (10 - (listNumbers.reduce((acc, x) => acc + x, 0) % 10)) === checkDigit; */
 }
 
 /**
  * Returns the digital root of integer:
  *   step1 : find sum of all digits
- *   step2 : if sum > 9 then goto step1 otherwise return the sum
+ *   step2 : if sum > 9 then go to step1 otherwise return the sum
  *
  * @param {number} n
  * @return {number}
@@ -268,8 +316,12 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let sum = num;
+  while (sum > 9) {
+    sum = String(sum).split('').reduce((acc, x) => acc + +x, 0);
+  }
+  return sum;
 }
 
 
@@ -319,8 +371,19 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let ans = '';
+  let number = num;
+  while (number >= n) {
+    ans += number % n;
+    number = Math.trunc(number / n);
+  }
+  if (number === n) {
+    ans += Math.trunc(number / n);
+  } else {
+    ans += number % n;
+  }
+  return ans.split('').reverse().join('');
 }
 
 
@@ -336,8 +399,29 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const list = [];
+  for (let i = 0; i < pathes.length; i += 1) {
+    list.push(pathes[i].split('/'));
+  }
+  let ans = '';
+  for (let i = 0; i < pathes.length; i += 1) {
+    if (pathes[i][0] === '/') {
+      list[i][0] = '/';
+    }
+  }
+  const minLen = Math.min(...list.map((x) => x.length));
+  for (let i = 0; i < minLen; i += 1) { // width of min element
+    const example = list[0][i];
+    for (let j = 0; j < list.length; j += 1) { // amount elements in list
+      if (list[j][i] !== example) {
+        return ans;
+      }
+    }
+    ans += `${example}/`;
+    if (ans === '//') { ans = '/'; }
+  }
+  return ans;
 }
 
 
