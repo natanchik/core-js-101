@@ -56,6 +56,13 @@ function getJSON(obj) {
  */
 function fromJSON(/* proto, json */) {
   throw new Error('Not implemented');
+  /* const prot = String(proto).split('.')[0];
+  const options = Object.values(JSON.parse(json));
+  let ans = `new ${prot}(`;
+  for (let i = 0; i < options.length; i += 1) {
+    ans += options[i];
+  }
+  return `${ans})`; */
 }
 
 
