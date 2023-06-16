@@ -177,7 +177,6 @@ function isInsideCircle(circle, point) {
 
 
 /**
- * TODO this task
  * Returns the first non repeated char in the specified strings otherwise returns null.
  *
  * @param {string} str
@@ -188,15 +187,15 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
-  // const set = new Set(str.split());
-  // for (const char of set) {
-  //   if ((str.split(`${char}`).length - 1) === 1) {
-  //     return char;
-  //   }
-  // }
-  // return null;
+function findFirstSingleChar(str) {
+  const letters = Array.from(new Set(str.split('')));
+
+  for (let i = 0; i < letters.length; i += 1) {
+    if ((str.match(new RegExp(`${letters[i]}`, 'g')) || []).length === 1) {
+      return letters[i];
+    }
+  }
+  return null;
 }
 
 
@@ -223,8 +222,13 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  /* throw new Error('Not implemented'); */
+  let ans = '';
+  ans += isStartIncluded ? '[' : '(';
+  ans += (a > b) ? `${b}, ${a}` : `${a}, ${b}`;
+  ans += isEndIncluded ? ']' : ')';
+  return ans;
 }
 
 
@@ -282,9 +286,9 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-  /* const checkDigit = ccn % 10;
+function isCreditCardNumber(ccn) {
+  /* throw new Error('Not implemented'); */
+  const checkDigit = +String(ccn).slice(-1);
   const number = String(ccn).slice(0, -1).split('').reverse();
   const listNumbers = [];
   for (let i = 0; i < number.length; i += 1) {
@@ -299,7 +303,8 @@ function isCreditCardNumber(/* ccn */) {
     }
     listNumbers.push(num);
   }
-  return (10 - (listNumbers.reduce((acc, x) => acc + x, 0) % 10)) === checkDigit; */
+  const totalDigit = listNumbers.reduce((acc, x) => acc + x, 0) % 10;
+  return (10 - totalDigit) === (checkDigit || 10);
 }
 
 /**
@@ -348,6 +353,30 @@ function getDigitalRoot(num) {
  */
 function isBracketsBalanced(/* str */) {
   throw new Error('Not implemented');
+  /* const openedChars = {
+    '[': 0, '(': 0, '{': 0, '<': 0,
+  };
+  const closedChars = {
+    ']': 0, ')': 0, '}': 0, '>': 0,
+  };
+  for (let i = 0; i < str.length; i += 1) {
+    if (Object.keys(openedChars).includes(str[i])) {
+      openedChars[str[i]] += 1;
+    } else if (Object.keys(closedChars).includes(str[i])) {
+      closedChars[str[i]] += 1;
+    }
+    for (let j = 0; j < 4; j += 1) {
+      if (Object.values(openedChars)[j] < Object.values(closedChars)[j]) {
+        return false;
+      }
+    }
+  }
+  for (let i = 0; i < 4; i += 1) {
+    if (Object.values(openedChars)[i] !== Object.values(closedChars)[i]) {
+      return false;
+    }
+  }
+  return true; */
 }
 
 
