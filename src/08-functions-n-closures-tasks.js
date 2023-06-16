@@ -65,12 +65,13 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom(/* a = 0, b = 0, c = 0 */) {
-  throw new Error('Not implemented');
-  /* if (!a && !b && !c) { return null; }
+function getPolynom(...params) {
+  if (params.length === 0) { return null; }
+  const list = [0, 0];
+  for (let i = 0; i < params.length; i += 1) { list.push(params[i]); }
   return function polynom(x) {
-    return a * x ** 2 + b * x + c;
-  }; */
+    return list.at(-3) * x ** 2 + list.at(-2) * x + list.at(-1);
+  };
 }
 
 
@@ -88,11 +89,12 @@ function getPolynom(/* a = 0, b = 0, c = 0 */) {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
-  /* const oldMem = newMem || func();
-  let newMem = func();
-  return oldMem; */
+function memoize(func) {
+  /* throw new Error('Not implemented'); */
+  const mem = func();
+  return function mems() {
+    return mem;
+  };
 }
 
 
@@ -141,6 +143,10 @@ function retry(/* func, attempts */) {
  */
 function logger(/* func, logFunc */) {
   throw new Error('Not implemented');
+  /* return function logg(...params) {
+    return logFunc(`${func.name}(${params}) starts
+${func.name}(${params}) ends`);
+  }; */
 }
 
 
@@ -157,8 +163,18 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  /* throw new Error('Not implemented'); */
+  let ans = '';
+  for (let i = 0; i < args1.length; i += 1) {
+    ans += args1[i];
+  }
+  return function useArgs(...params) {
+    for (let i = 0; i < params.length; i += 1) {
+      ans += params[i];
+    }
+    return ans;
+  };
 }
 
 
@@ -179,8 +195,13 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  /* throw new Error('Not implemented'); */
+  let id = startFrom - 1;
+  return function getId() {
+    id += 1;
+    return id;
+  };
 }
 
 
