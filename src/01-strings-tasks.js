@@ -225,8 +225,16 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const inputList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const outputList = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  const list = str.split('');
+  let ans = '';
+  for (let i = 0; i < list.length; i += 1) {
+    ans += outputList[inputList.indexOf(list[i])] || list[i];
+  }
+  /* throw new Error('Not implemented'); */
+  return ans;
 }
 
 /**
