@@ -156,7 +156,6 @@ function logger(func, logFunc) {
   /* throw new Error('Not implemented'); */
   return function logg(...params) {
     const args = JSON.stringify(params);
-    console.log(typeof args);
     logFunc(`${func.name}(${args.slice(1, -1)}) starts`);
     const res = func(...params);
     logFunc(`${func.name}(${args.slice(1, -1)}) ends`);
