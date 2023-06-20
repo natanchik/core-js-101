@@ -117,26 +117,16 @@ function getFastestPromise(array) {
  *
  */
 function chainPromises(array, action) {
-  const getResult = async function getResult() {
-    const ans = [];
-    const getAns = async function getAns() {
-      for (let i = 0; i < array.length; i += 1) {
-        array[i].then((data) => ans.push(data));
-      }
-    };
-    let result;
-    const doAction = function doAction() {
-      result = ans.reduce((acc, x) => action(acc, x));
-    };
-    await getAns().then(() => doAction());
-    return result;
-  };
-  /* throw new Error('Not implemented'); */
   return new Promise((resolve, reject) => {
-    resolve(getResult());
-    reject(new Error('Something wrong'));
-  });
+    const ans = [];
+    for (let i = 0; i < array.length; i += 1) {
+      array[i].then((data) => ans.push(data))
+        .catch((error) => reject(error));
+    }
+    resolve(ans);
+  }).then((ans) => ans.reduce((acc, x) => action(acc, x)));
 }
+
 
 module.exports = {
   willYouMarryMe,
