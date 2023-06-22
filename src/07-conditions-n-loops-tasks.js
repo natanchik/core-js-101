@@ -523,8 +523,21 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  /* throw new Error('Not implemented'(); */
+  const hasWinner = (arr) => arr[0] && arr.filter((el) => el === arr[0]).length === 3;
+  for (let i = 0; i < 3; i += 1) {
+    if (hasWinner(position[i])) {
+      return position[i][0];
+    } if (hasWinner([position[0][i], position[1][i], position[2][i]])) {
+      return position[0][i];
+    }
+  }
+  if (hasWinner([position[0][0], position[1][1], position[2][2]])
+      || hasWinner([position[0][2], position[1][1], position[2][0]])) {
+    return position[1][1];
+  }
+  return undefined;
 }
 
 
