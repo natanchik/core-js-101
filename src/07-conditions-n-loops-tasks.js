@@ -351,32 +351,24 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
-  /* const openedChars = {
-    '[': 0, '(': 0, '{': 0, '<': 0,
-  };
-  const closedChars = {
-    ']': 0, ')': 0, '}': 0, '>': 0,
-  };
+function isBracketsBalanced(str) {
+  /* throw new Error('Not implemented'); */
+  const openedChars = ['[', '(', '{', '<'];
+  const closedChars = [']', ')', '}', '>'];
+  let stack = '';
   for (let i = 0; i < str.length; i += 1) {
-    if (Object.keys(openedChars).includes(str[i])) {
-      openedChars[str[i]] += 1;
-    } else if (Object.keys(closedChars).includes(str[i])) {
-      closedChars[str[i]] += 1;
-    }
-    for (let j = 0; j < 4; j += 1) {
-      if (Object.values(openedChars)[j] < Object.values(closedChars)[j]) {
+    if (openedChars.includes(str[i])) {
+      stack += str[i];
+    } else if (closedChars.includes(str[i])) {
+      if (openedChars[closedChars.indexOf(str[i])] === stack.at(-1)) {
+        stack = stack.slice(0, -1);
+      } else {
         return false;
       }
     }
   }
-  for (let i = 0; i < 4; i += 1) {
-    if (Object.values(openedChars)[i] !== Object.values(closedChars)[i]) {
-      return false;
-    }
-  }
-  return true; */
+  if (stack) { return false; }
+  return true;
 }
 
 
