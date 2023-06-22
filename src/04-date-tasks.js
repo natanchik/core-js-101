@@ -113,8 +113,8 @@ function timeSpanToString(startDate, endDate) {
  */
 
 function angleBetweenClockHands(date) {
-  const hours = new Date(date).getUTCHours();
-  const mins = new Date(date).getUTCMinutes();
+  const hours = date.getUTCHours();
+  const mins = date.getUTCMinutes();
   let deg = 0.5 * (60 * hours - 11 * mins);
   const koef = deg / 180;
 
